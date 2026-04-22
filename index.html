@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dennis Ashiagbor | Data Analyst Portfolio</title>
+  <meta name="description" content="Portfolio website for Dennis Ashiagbor featuring SQL, Tableau, Python, revenue analytics, and business intelligence projects." />
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: rgba(255, 255, 255, 0.92);
+      --surface-solid: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --light: #94a3b8;
+      --border: rgba(148, 163, 184, 0.22);
+      --blue: #2563eb;
+      --blue-soft: #dbeafe;
+      --green: #10b981;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(16, 185, 129, 0.10), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(247, 248, 252, 0.82);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
+      font-weight: 800;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a:hover,
+    .nav a:focus { color: var(--text); }
+
+    .hero {
+      padding: 4rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.04);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .dot {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 5vw, 4.75rem);
+      line-height: 1.03;
+      margin: 1.4rem 0 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p.lead {
+      font-size: clamp(1.08rem, 1.7vw, 1.28rem);
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.35rem;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover,
+    .btn:focus { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: #0f172a;
+      color: #fff;
+      box-shadow: 0 12px 22px rgba(15,23,42,0.14);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .btn-soft {
+      background: var(--blue-soft);
+      color: #1d4ed8;
+      border-color: rgba(59,130,246,0.15);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1rem;
+      margin-top: 2.2rem;
+      max-width: 760px;
+    }
+
+    .stat-card,
+    .card,
+    .project-card,
+    .timeline-card,
+    .contact-card,
+    .feature-panel {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 1.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .feature-panel {
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+
+    .feature-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .eyebrow {
+      font-size: 0.73rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--light);
+      font-weight: 800;
+    }
+
+    .feature-top h3 {
+      margin: 0.4rem 0 0;
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
+
+    .tag {
+      background: #ecfdf5;
+      color: #047857;
+      border-radius: 999px;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .mini-kpi {
+      background: #fff;
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 20px;
+      padding: 0.9rem;
+    }
+
+    .mini-kpi .label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--light);
+      font-weight: 800;
+    }
+
+    .mini-kpi .value {
+      margin-top: 0.45rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .chart-panel {
+      margin-top: 1rem;
+      background: #fff;
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 24px;
+      padding: 1rem;
+    }
+
+    .chart-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-wrap {
+      background: #f8fafc;
+      border-radius: 18px;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.16);
+    }
+
+    .chart-axis {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 0.7rem;
+      display: flex;
+      justify-content: space-between;
+      color: var(--light);
+      font-size: 0.72rem;
+    }
+
+    section {
+      padding: 4rem 0;
+      scroll-margin-top: 5rem;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 2rem;
+    }
+
+    .section-head .kicker {
+      color: var(--blue);
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .section-head h2 {
+      margin: 0.7rem 0 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      overflow: hidden;
+    }
+
+    .project-card.featured {
+      border-color: rgba(96,165,250,0.35);
+      box-shadow: 0 18px 45px rgba(37,99,235,0.12);
+    }
+
+    .project-copy {
+      padding: 1.6rem;
+      border-bottom: 1px solid rgba(148,163,184,0.14);
+    }
+
+    .project-copy h3 {
+      margin: 0.6rem 0 0;
+      font-size: 1.5rem;
+      line-height: 1.15;
+    }
+
+    .project-copy p {
+      margin: 1rem 0 0;
+      color: var(--muted);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-visual {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.18);
+      background: linear-gradient(135deg, #fff, #f8fafc);
+      min-height: 270px;
+      padding: 1rem;
+    }
+
+    .proj-screen {
+      height: 100%;
+      border-radius: 20px;
+      background: #0f172a;
+      padding: 1rem;
+      color: #fff;
+    }
+
+    .proj-bars {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.6rem;
+      height: 140px;
+      align-items: end;
+      margin-top: 1rem;
+    }
+
+    .proj-bars span {
+      display: block;
+      border-radius: 12px 12px 6px 6px;
+      background: linear-gradient(180deg, #f59e0b, #fbbf24);
+    }
+
+    .proj-rings {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #38bdf8, transparent 34%), radial-gradient(circle at 70% 68%, #1d4ed8, transparent 46%), #020617;
+      margin-left: auto;
+    }
+
+    .quote-ui {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+    }
+
+    .quote-ui .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin: 0.7rem 0;
+    }
+
+    .quote-ui .box,
+    .quote-ui .button,
+    .quote-ui .header-line {
+      border-radius: 14px;
+    }
+
+    .quote-ui .header-line {
+      height: 10px;
+      width: 120px;
+      background: #e2e8f0;
+    }
+
+    .quote-ui .box {
+      height: 48px;
+      background: #f1f5f9;
+    }
+
+    .quote-ui .button {
+      height: 42px;
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .chip {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: #f1f5f9;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+    }
+
+    .about-grid,
+    .contact-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+    }
+
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .skill-pill {
+      padding: 0.6rem 0.95rem;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid rgba(148,163,184,0.2);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .plain-list {
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .plain-list li { margin-bottom: 0.7rem; }
+
+    .timeline-card {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .timeline-top h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .timeline-date {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .dark-callout {
+      background: #0f172a;
+      color: #fff;
+      border-radius: 36px;
+      padding: 2.2rem;
+      box-shadow: 0 18px 42px rgba(15,23,42,0.2);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .dark-callout .kicker { color: #93c5fd; }
+
+    .dark-callout p { color: #cbd5e1; max-width: 780px; }
+
+    .contact-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .contact-card {
+      padding: 1.35rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .contact-card:hover,
+    .contact-card:focus { transform: translateY(-2px); }
+
+    .contact-card .label {
+      color: var(--light);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .contact-card .value {
+      margin-top: 0.65rem;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .site-footer {
+      padding: 2rem 0 3rem;
+      color: var(--light);
+      font-size: 0.92rem;
+    }
+
+    .mobile-toggle {
+      display: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 14px;
+      padding: 0.7rem 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .projects-grid,
+      .about-grid,
+      .contact-grid,
+      .dark-callout {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid,
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header .container { align-items: flex-start; }
+      .mobile-toggle { display: inline-flex; }
+      .nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+        padding-top: 0.75rem;
+      }
+      .nav.open { display: flex; }
+      .kpi-grid,
+      .stats-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 3rem 0; }
+      .dark-callout { padding: 1.7rem; }
+      .chart-wrap { height: 190px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#top">DENNIS ASHIAGBOR</a>
+      <button class="mobile-toggle" type="button" aria-label="Toggle navigation" onclick="toggleNav()">Menu</button>
+      <nav class="nav" id="site-nav">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill"><span class="dot"></span> Phoenix, AZ · Revenue Analytics · Business Intelligence</div>
+          <h1>Data analyst portfolio built for business decisions, not just charts.</h1>
+          <p class="lead">I build SQL- and dashboard-driven analytics projects focused on revenue performance, operational clarity, and executive-ready storytelling. My background blends enterprise account strategy, supply chain insight, and hands-on analytics execution.</p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web" target="_blank" rel="noreferrer">GitHub Profile</a>
+            <a class="btn btn-soft" href="#contact">Let’s Connect</a>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value">10+</div>
+              <div class="stat-label">Years in business roles</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">$20M+</div>
+              <div class="stat-label">Enterprise portfolio managed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Featured public repos</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="feature-panel">
+            <div class="feature-top">
+              <div>
+                <div class="eyebrow">Featured Dashboard</div>
+                <h3>Revenue Intelligence</h3>
+              </div>
+              <div class="tag">Live BI</div>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="mini-kpi"><div class="label">Won Deals</div><div class="value">4,238</div></div>
+              <div class="mini-kpi"><div class="label">Revenue</div><div class="value">$10.0M</div></div>
+              <div class="mini-kpi"><div class="label">Win Rate</div><div class="value">63.2%</div></div>
+              <div class="mini-kpi"><div class="label">Avg Deal Size</div><div class="value">$2,361</div></div>
+            </div>
+
+            <div class="chart-panel">
+              <div class="chart-title">Monthly Won Revenue Trend</div>
+              <div class="chart-wrap">
+                <svg viewBox="0 0 620 220" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M42 146 C90 164, 130 105, 172 118 S252 60, 304 79 S376 49, 422 41 S488 86, 536 66 S584 26, 600 34" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" />
+                </svg>
+                <div class="chart-axis"><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Dec</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Featured Work</div>
+          <h2>Selected analytics and automation projects</h2>
+          <p>A focused set of projects that demonstrate SQL, Python, data storytelling, business intelligence, and workflow improvement.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card featured">
+            <div class="project-copy">
+              <div class="eyebrow" style="color:#2563eb">SQL • PostgreSQL • Tableau</div>
+              <h3>Revenue Intelligence Dashboard</h3>
+              <p>End-to-end business intelligence project analyzing 7,375 sales opportunities and $10.0M in won revenue. Built a cloud PostgreSQL analytics layer, wrote KPI and time-series SQL, and designed an executive Tableau dashboard.</p>
+            </div>
+            <div class="project-body">
+              <div class="project-visual">
+                <div class="feature-panel" style="padding:0; box-shadow:none; border:none; background:transparent;">
+                  <div class="kpi-grid">
+                    <div class="mini-kpi"><div class="label">Won Deals</div><div class="value">4,238</div></div>
+                    <div class="mini-kpi"><div class="label">Revenue</div><div class="value">$10.0M</div></div>
+                    <div class="mini-kpi"><div class="label">Win Rate</div><div class="value">63.2%</div></div>
+                    <div class="mini-kpi"><div class="label">Avg Deal Size</div><div class="value">$2,361</div></div>
+                  </div>
+                  <div class="chart-panel">
+                    <div class="chart-title">Executive Revenue Overview</div>
+                    <div class="chart-wrap">
+                      <svg viewBox="0 0 620 220" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M42 146 C90 164, 130 105, 172 118 S252 60, 304 79 S376 49, 422 41 S488 86, 536 66 S584 26, 600 34" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="chips">
+                <span class="chip">7,375 opportunities</span>
+                <span class="chip">$10.0M revenue</span>
+                <span class="chip">63.2% win rate</span>
+                <span class="chip">Tableau dashboard</span>
+              </div>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web" target="_blank" rel="noreferrer">View Code</a>
+                <a class="btn btn-secondary" href="#" target="_blank" rel="noreferrer">Replace with Tableau Link</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-copy">
+              <div class="eyebrow" style="color:#2563eb">Python • SQL • Machine Learning</div>
+              <h3>SpaceX Falcon 9 Launch Success Prediction</h3>
+              <p>Applied data science capstone project exploring launch outcomes with exploratory analysis, SQL, machine learning, and dashboarding.</p>
+            </div>
+            <div class="project-body">
+              <div class="project-visual">
+                <div class="proj-screen">
+                  <div class="eyebrow" style="color:#94a3b8">Machine Learning Project</div>
+                  <div style="margin-top:0.7rem;font-size:1.45rem;font-weight:800;max-width:260px;line-height:1.15;">Falcon 9 Success Prediction</div>
+                  <div class="proj-rings"></div>
+                </div>
+              </div>
+              <div class="chips">
+                <span class="chip">EDA</span>
+                <span class="chip">SQL</span>
+                <span class="chip">classification</span>
+                <span class="chip">Plotly Dash</span>
+              </div>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web/applied-data-science-capstone" target="_blank" rel="noreferrer">View Code</a>
+                <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web/applied-data-science-capstone" target="_blank" rel="noreferrer">Open Project</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-copy">
+              <div class="eyebrow" style="color:#2563eb">Python • Data Analysis • Modeling</div>
+              <h3>DonorsChoose Project Approval Analysis</h3>
+              <p>Project exploring the factors that influence project approval outcomes through data cleaning, exploratory analysis, visualization, and modeling.</p>
+            </div>
+            <div class="project-body">
+              <div class="project-visual" style="background:#fffbeb;">
+                <div style="background:#fff;border-radius:22px;padding:1rem;box-shadow:0 10px 24px rgba(15,23,42,0.06);height:100%;">
+                  <div style="font-size:1.1rem;font-weight:800;">Approval Driver Analysis</div>
+                  <div class="proj-bars">
+                    <span style="height:72%"></span>
+                    <span style="height:86%"></span>
+                    <span style="height:64%"></span>
+                    <span style="height:93%"></span>
+                    <span style="height:76%"></span>
+                    <span style="height:58%"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="chips">
+                <span class="chip">data cleaning</span>
+                <span class="chip">feature analysis</span>
+                <span class="chip">visualization</span>
+                <span class="chip">modeling</span>
+              </div>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web/DonorsChoose-project-approval-analysis" target="_blank" rel="noreferrer">View Code</a>
+                <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web/DonorsChoose-project-approval-analysis" target="_blank" rel="noreferrer">Open Project</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-copy">
+              <div class="eyebrow" style="color:#2563eb">HTML • Workflow Automation • Client Tool</div>
+              <h3>Permanent Lighting Quote Generator</h3>
+              <p>Customer-facing quoting and proposal workflow system designed to make pricing and proposal generation faster, cleaner, and more consistent.</p>
+            </div>
+            <div class="project-body">
+              <div class="project-visual" style="background:#ecfdf5;">
+                <div class="quote-ui">
+                  <div class="header-line"></div>
+                  <div class="row">
+                    <div class="box"></div>
+                    <div class="box"></div>
+                  </div>
+                  <div class="button"></div>
+                </div>
+              </div>
+              <div class="chips">
+                <span class="chip">workflow automation</span>
+                <span class="chip">client-focused</span>
+                <span class="chip">proposal system</span>
+                <span class="chip">HTML</span>
+              </div>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web/permanent-lighting-quote-generator" target="_blank" rel="noreferrer">View Code</a>
+                <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web/permanent-lighting-quote-generator" target="_blank" rel="noreferrer">Open Project</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="section-head" style="margin-bottom:0;">
+          <div class="kicker">About</div>
+          <h2>Business-grounded analytics with an operator’s perspective</h2>
+          <p>My work sits at the intersection of revenue, operations, and practical decision support. I bring years of enterprise-facing experience, an MBA in Supply Chain Management and Leadership, and a growing portfolio of SQL, Python, and Tableau work focused on business impact.</p>
+        </div>
+        <div>
+          <div class="card">
+            <h3>What I focus on</h3>
+            <div class="skills-cloud">
+              <span class="skill-pill">SQL</span>
+              <span class="skill-pill">PostgreSQL</span>
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">Tableau</span>
+              <span class="skill-pill">Pandas</span>
+              <span class="skill-pill">NumPy</span>
+              <span class="skill-pill">Salesforce</span>
+              <span class="skill-pill">Excel</span>
+              <span class="skill-pill">Data Visualization</span>
+              <span class="skill-pill">Business Intelligence</span>
+              <span class="skill-pill">Revenue Analytics</span>
+              <span class="skill-pill">Forecasting</span>
+              <span class="skill-pill">Supply Chain Analytics</span>
+              <span class="skill-pill">Dashboard Design</span>
+            </div>
+          </div>
+          <div class="card" style="margin-top:1rem;">
+            <h3>What I bring</h3>
+            <ul class="plain-list">
+              <li>• Executive-facing experience translating metrics into action.</li>
+              <li>• Strong business context from logistics, sales, and supply chain environments.</li>
+              <li>• Hands-on project work using SQL, Python, Tableau, and workflow automation.</li>
+              <li>• A portfolio built around business questions, not toy datasets.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Experience</div>
+          <h2>Enterprise sales and analytics experience that informs the work</h2>
+          <p>The portfolio is technical, but the point of view is commercial and operational. That combination is part of the value.</p>
+        </div>
+
+        <div class="timeline-card">
+          <div class="timeline-top">
+            <h3>Account Executive · UPS</h3>
+            <div class="timeline-date">2018 – 2025</div>
+          </div>
+          <ul class="plain-list" style="margin-top:1rem;">
+            <li>• Managed a $20M+ enterprise portfolio and used CRM, pipeline, and performance data to support forecasting, retention, and growth decisions.</li>
+            <li>• Generated $5M+ in net-new revenue through account segmentation, pipeline analysis, and high-probability opportunity prioritization.</li>
+            <li>• Led KPI-driven business reviews translating shipment volume, margin, service levels, and cost data into executive recommendations.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-card">
+          <div class="timeline-top">
+            <h3>International Account Executive · UPS</h3>
+            <div class="timeline-date">2016 – 2018</div>
+          </div>
+          <ul class="plain-list" style="margin-top:1rem;">
+            <li>• Designed cross-border growth strategies using shipping patterns, market demand data, and competitive insights.</li>
+            <li>• Helped drive international revenue growth and volume expansion through data-informed targeting and execution.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="dark-callout">
+          <div>
+            <div class="kicker">Now Building</div>
+            <h2 style="margin:0.75rem 0 0;font-size:clamp(2rem,3vw,3rem);line-height:1.08;">Next up: more dashboards, deeper SQL, stronger BI storytelling.</h2>
+            <p>This portfolio is growing toward revenue analytics, BI analyst, sales operations, and supply chain analytics roles. New projects will continue to emphasize executive-ready communication and measurable business questions.</p>
+          </div>
+          <a class="btn btn-secondary" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Contact</div>
+          <h2>Let’s connect</h2>
+          <p>If you’re hiring for analytics, BI, sales operations, or supply chain-focused roles, I’d be glad to connect.</p>
+        </div>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:dennisnashiagbor@gmail.com">
+            <div class="label">Email</div>
+            <div class="value">dennisnashiagbor@gmail.com</div>
+          </a>
+          <a class="contact-card" href="https://github.com/dennisnashiagbor-web" target="_blank" rel="noreferrer">
+            <div class="label">GitHub</div>
+            <div class="value">github.com/dennisnashiagbor-web</div>
+          </a>
+          <a class="contact-card" href="https://www.linkedin.com/in/dennisashiagbor" target="_blank" rel="noreferrer">
+            <div class="label">LinkedIn</div>
+            <div class="value">linkedin.com/in/dennisashiagbor</div>
+          </a>
+          <a class="contact-card" href="#top">
+            <div class="label">Location</div>
+            <div class="value">Phoenix, Arizona</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> Dennis Ashiagbor. Built for GitHub Pages.</div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('open');
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
