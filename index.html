@@ -23,12 +23,13 @@
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --radius-xl: 30px;
       --radius-lg: 22px;
-      --max-width: 1180px;
+      --max-width: 1280px;
       --section-space: 88px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -83,7 +84,9 @@
     }
 
     .nav a:hover,
-    .nav a:focus { color: var(--text); }
+    .nav a:focus {
+      color: var(--text);
+    }
 
     .mobile-toggle {
       display: none;
@@ -162,7 +165,9 @@
     }
 
     .btn:hover,
-    .btn:focus { transform: translateY(-1px); }
+    .btn:focus {
+      transform: translateY(-1px);
+    }
 
     .btn-primary {
       background: #0f172a;
@@ -257,30 +262,37 @@
 
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
       gap: 0.8rem;
+      align-items: stretch;
     }
 
     .mini-kpi {
-      padding: 0.9rem;
+      padding: 1rem;
       border-radius: 20px;
       background: #fff;
       border: 1px solid rgba(148, 163, 184, 0.22);
+      min-height: 122px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .mini-kpi .label {
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted-light);
       font-weight: 800;
+      line-height: 1.35;
     }
 
     .mini-kpi .value {
       margin-top: 0.45rem;
-      font-size: 1.3rem;
+      font-size: clamp(1.7rem, 2.4vw, 2.15rem);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.1;
+      white-space: nowrap;
     }
 
     .chart-panel {
@@ -356,7 +368,12 @@
       align-items: stretch;
     }
 
-    .project-card { overflow: hidden; display: flex; flex-direction: column; }
+    .project-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
     .project-card.featured {
       border-color: rgba(96, 165, 250, 0.36);
       box-shadow: 0 18px 45px rgba(37, 99, 235, 0.12);
@@ -515,8 +532,15 @@
       align-items: start;
     }
 
-    .info-card { padding: 1.5rem; }
-    .info-card h3 { margin-top: 0; margin-bottom: 1rem; font-size: 1.15rem; }
+    .info-card {
+      padding: 1.5rem;
+    }
+
+    .info-card h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+    }
 
     .skills-cloud {
       display: flex;
@@ -541,7 +565,9 @@
       color: var(--muted);
     }
 
-    .plain-list li { margin-bottom: 0.7rem; }
+    .plain-list li {
+      margin-bottom: 0.7rem;
+    }
 
     .timeline-card {
       padding: 1.5rem;
@@ -579,20 +605,33 @@
       box-shadow: 0 18px 42px rgba(15, 23, 42, 0.2);
     }
 
-    .dark-callout .kicker { color: #93c5fd; }
-    .dark-callout p { color: #cbd5e1; max-width: 780px; }
+    .dark-callout .kicker {
+      color: #93c5fd;
+    }
+
+    .dark-callout p {
+      color: #cbd5e1;
+      max-width: 780px;
+    }
 
     .contact-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      align-items: stretch;
     }
 
     .contact-card {
-      padding: 1.35rem;
+      padding: 1.45rem;
+      min-height: 165px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     .contact-card:hover,
-    .contact-card:focus { transform: translateY(-2px); }
+    .contact-card:focus {
+      transform: translateY(-2px);
+    }
 
     .contact-card .label {
       font-size: 0.72rem;
@@ -605,6 +644,9 @@
     .contact-card .value {
       margin-top: 0.65rem;
       font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
       word-break: break-word;
     }
 
@@ -625,26 +667,40 @@
       color: var(--muted-light);
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1100px) {
       .hero-grid,
       .projects-grid,
       .about-grid,
-      .contact-grid,
       .dark-callout {
         grid-template-columns: 1fr;
       }
 
-      .kpi-grid,
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+      }
+
       .stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .dark-callout { align-items: start; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dark-callout {
+        align-items: start;
+      }
     }
 
     @media (max-width: 760px) {
-      .site-header .container { align-items: flex-start; }
-      .mobile-toggle { display: inline-flex; }
+      .site-header .container {
+        align-items: flex-start;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
       .nav {
         display: none;
         width: 100%;
@@ -653,15 +709,32 @@
         gap: 0.8rem;
         padding-top: 0.75rem;
       }
-      .nav.open { display: flex; }
 
-      .hero { padding-top: 56px; }
-      section { padding: 60px 0; }
+      .nav.open {
+        display: flex;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
       .kpi-grid,
       .stats-grid,
-      .contact-grid { grid-template-columns: 1fr; }
-      .chart-wrap { height: 190px; }
-      .dark-callout { padding: 1.7rem; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-wrap {
+        height: 190px;
+      }
+
+      .dark-callout {
+        padding: 1.7rem;
+      }
     }
   </style>
 </head>
@@ -690,7 +763,7 @@
           <div class="cta-row">
             <a class="btn btn-primary" href="#projects">View Projects</a>
             <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web" target="_blank" rel="noreferrer">GitHub Profile</a>
-            <a class="btn btn-secondary" href="/Dennis_Ashiagbor_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            <a class="btn btn-secondary" href="./Dennis_Ashiagbor_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
             <a class="btn btn-soft" href="#contact">Contact</a>
           </div>
 
@@ -730,14 +803,17 @@
             <div class="chart-panel">
               <div class="chart-title">Monthly Won Revenue Trend</div>
               <div class="chart-wrap">
-                <!-- Optional: replace this SVG preview with a real screenshot if you prefer -->
-                <!-- Example: <img class="thumb-img" src="assets/revenue-dashboard-hero.png" alt="Revenue dashboard preview" /> -->
+                <!-- Optional: replace this SVG preview with a real screenshot -->
+                <!-- Example:
+                <img class="thumb-img" src="./assets/revenue-dashboard-hero.png" alt="Revenue dashboard preview" />
+                -->
                 <svg viewBox="0 0 620 220" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
                   <path d="M42 146 C90 164, 130 105, 172 118 S252 60, 304 79 S376 49, 422 41 S488 86, 536 66 S584 26, 600 34" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" />
                 </svg>
                 <div class="chart-axis"><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Dec</span></div>
               </div>
             </div>
+
             <div class="note">Tip: if you want a stronger homepage visual, replace the chart preview above with a dashboard screenshot.</div>
           </div>
         </div>
@@ -759,16 +835,18 @@
               <h3>Revenue Intelligence Dashboard</h3>
               <p>End-to-end business intelligence project analyzing 7,375 sales opportunities and $10.0M in won revenue. Built a PostgreSQL analytics layer, wrote KPI and time-series SQL, and designed an executive Tableau dashboard focused on revenue, win rate, deal size, and product performance.</p>
             </div>
+
             <div class="project-body">
               <div class="project-visual">
-                <!-- REPLACE THIS IMAGE PATH with your dashboard screenshot thumbnail -->
-                <!-- Recommended filename: assets/revenue-dashboard-thumbnail.png -->
+                <!-- ADD YOUR DASHBOARD THUMBNAIL HERE -->
+                <!-- Recommended filename: ./assets/revenue-dashboard-thumbnail.png -->
                 <img
                   class="thumb-img"
-                  src="assets/revenue-dashboard-thumbnail.png"
+                  src="./assets/revenue-dashboard-thumbnail.png"
                   alt="Revenue Intelligence Dashboard thumbnail"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                 />
+
                 <div class="thumb-fallback" style="display:none;">
                   <div class="kpi-grid">
                     <div class="mini-kpi"><div class="label">Won Deals</div><div class="value">4,238</div></div>
@@ -776,6 +854,7 @@
                     <div class="mini-kpi"><div class="label">Win Rate</div><div class="value">63.2%</div></div>
                     <div class="mini-kpi"><div class="label">Avg Deal Size</div><div class="value">$2,361</div></div>
                   </div>
+
                   <div class="chart-panel" style="margin-top:1rem;">
                     <div class="chart-title">Executive Revenue Overview</div>
                     <div class="chart-wrap">
@@ -795,10 +874,11 @@
               </div>
 
               <div class="project-actions">
-                <!-- REPLACE with repo link for this specific project if you split it into its own repo -->
+                <!-- Replace with your project repo link if you split this into its own repo -->
                 <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web" target="_blank" rel="noreferrer">View Repository</a>
-                <!-- REPLACE with your Tableau Public dashboard share link -->
-                <a class="btn btn-secondary" href="https://public.tableau.com/" target="_blank" rel="noreferrer">View Dashboard</a>
+
+                <!-- Replace with your real Tableau Public share link -->
+                <a class="btn btn-secondary" href="YOUR_TABLEAU_LINK_HERE" target="_blank" rel="noreferrer">View Dashboard</a>
               </div>
             </div>
           </article>
@@ -809,15 +889,17 @@
               <h3>SpaceX Falcon 9 Launch Success Prediction</h3>
               <p>Applied data science capstone project exploring launch outcomes through exploratory analysis, SQL, classification modeling, and dashboard-style reporting.</p>
             </div>
+
             <div class="project-body">
               <div class="project-visual">
-                <!-- Optional screenshot path: assets/spacex-project-thumbnail.png -->
+                <!-- Optional screenshot path: ./assets/spacex-project-thumbnail.png -->
                 <img
                   class="thumb-img"
-                  src="assets/spacex-project-thumbnail.png"
+                  src="./assets/spacex-project-thumbnail.png"
                   alt="SpaceX project thumbnail"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
                 />
+
                 <div class="thumb-fallback" style="display:none;">
                   <div class="proj-screen">
                     <div class="eyebrow" style="color:#94a3b8;">Machine Learning Project</div>
@@ -826,12 +908,14 @@
                   </div>
                 </div>
               </div>
+
               <div class="chips">
                 <span class="chip">EDA</span>
                 <span class="chip">SQL</span>
                 <span class="chip">classification</span>
                 <span class="chip">Plotly Dash</span>
               </div>
+
               <div class="project-actions">
                 <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web/applied-data-science-capstone" target="_blank" rel="noreferrer">View Repository</a>
                 <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web/applied-data-science-capstone" target="_blank" rel="noreferrer">Open Project</a>
@@ -845,15 +929,17 @@
               <h3>DonorsChoose Project Approval Analysis</h3>
               <p>Project exploring the factors that influence project approval outcomes through data cleaning, exploratory analysis, visualization, and modeling.</p>
             </div>
+
             <div class="project-body">
               <div class="project-visual">
-                <!-- Optional screenshot path: assets/donorschoose-thumbnail.png -->
+                <!-- Optional screenshot path: ./assets/donorschoose-thumbnail.png -->
                 <img
                   class="thumb-img"
-                  src="assets/donorschoose-thumbnail.png"
+                  src="./assets/donorschoose-thumbnail.png"
                   alt="DonorsChoose project thumbnail"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
                 />
+
                 <div class="thumb-fallback" style="display:none; background:#fffbeb;">
                   <div style="background:#fff;border-radius:22px;padding:1rem;box-shadow:0 10px 24px rgba(15,23,42,0.06);height:100%;">
                     <div style="font-size:1.1rem;font-weight:800;">Approval Driver Analysis</div>
@@ -868,12 +954,14 @@
                   </div>
                 </div>
               </div>
+
               <div class="chips">
                 <span class="chip">data cleaning</span>
                 <span class="chip">feature analysis</span>
                 <span class="chip">visualization</span>
                 <span class="chip">modeling</span>
               </div>
+
               <div class="project-actions">
                 <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web/DonorsChoose-project-approval-analysis" target="_blank" rel="noreferrer">View Repository</a>
                 <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web/DonorsChoose-project-approval-analysis" target="_blank" rel="noreferrer">Open Project</a>
@@ -887,15 +975,17 @@
               <h3>Permanent Lighting Quote Generator</h3>
               <p>Customer-facing quoting and proposal workflow system designed to make pricing and proposal generation faster, cleaner, and more consistent.</p>
             </div>
+
             <div class="project-body">
               <div class="project-visual">
-                <!-- Optional screenshot path: assets/quote-generator-thumbnail.png -->
+                <!-- Optional screenshot path: ./assets/quote-generator-thumbnail.png -->
                 <img
                   class="thumb-img"
-                  src="assets/quote-generator-thumbnail.png"
+                  src="./assets/quote-generator-thumbnail.png"
                   alt="Quote generator thumbnail"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
                 />
+
                 <div class="thumb-fallback" style="display:none; background:#ecfdf5; padding:1rem;">
                   <div class="quote-ui">
                     <div class="header-line"></div>
@@ -907,12 +997,14 @@
                   </div>
                 </div>
               </div>
+
               <div class="chips">
                 <span class="chip">workflow automation</span>
                 <span class="chip">client-focused</span>
                 <span class="chip">proposal system</span>
                 <span class="chip">HTML</span>
               </div>
+
               <div class="project-actions">
                 <a class="btn btn-primary" href="https://github.com/dennisnashiagbor-web/permanent-lighting-quote-generator" target="_blank" rel="noreferrer">View Repository</a>
                 <a class="btn btn-secondary" href="https://github.com/dennisnashiagbor-web/permanent-lighting-quote-generator" target="_blank" rel="noreferrer">Open Project</a>
@@ -1024,14 +1116,17 @@
             <div class="label">Email</div>
             <div class="value">dennisnashiagbor@gmail.com</div>
           </a>
+
           <a class="contact-card" href="https://github.com/dennisnashiagbor-web" target="_blank" rel="noreferrer">
             <div class="label">GitHub</div>
-            <div class="value">github.com/dennisnashiagbor-web</div>
+            <div class="value">GitHub Profile</div>
           </a>
+
           <a class="contact-card" href="https://www.linkedin.com/in/dennisashiagbor" target="_blank" rel="noreferrer">
             <div class="label">LinkedIn</div>
-            <div class="value">linkedin.com/in/dennisashiagbor</div>
+            <div class="value">LinkedIn Profile</div>
           </a>
+
           <a class="contact-card" href="#top">
             <div class="label">Location</div>
             <div class="value">Phoenix, Arizona</div>
@@ -1050,6 +1145,7 @@
       const nav = document.getElementById('site-nav');
       nav.classList.toggle('open');
     }
+
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
