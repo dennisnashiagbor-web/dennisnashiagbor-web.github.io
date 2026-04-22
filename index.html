@@ -587,6 +587,34 @@
       color: var(--muted);
     }
 
+    .what-i-bring-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .what-i-bring-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .what-i-bring-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62rem;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
     .plain-list li {
       margin-bottom: 0.7rem;
     }
@@ -811,7 +839,7 @@
               <div class="stat-label">Enterprise book of business managed</div>
             </div>
             <div class="stat-card">
-              <div class="stat-value">IBM DS</div>
+              <div class="stat-value">IBM </div>
               <div class="stat-label">Data Science Professional Certificate</div>
             </div>
           </div>
@@ -1073,12 +1101,12 @@
           </div>
 
           <div class="info-card" style="margin-top:1rem;">
-            <h3>What I bring</h3>
-            <ul class="plain-list">
-              <li>• Strong grounding in revenue, operations, and customer-facing business environments.</li>
-              <li>• Comfortable translating performance metrics into recommendations for stakeholders and decision-makers.</li>
-              <li>• Project work centered on revenue analytics, operations, dashboard reporting, forecasting, and workflow improvement.</li>
-              <li>• A portfolio built around practical business use cases rather than generic sample work.</li>
+            <h3>What I bring to analytics work</h3>
+            <ul class="what-i-bring-list">
+              <li>Strong grounding in revenue, operations, and customer-facing business environments.</li>
+              <li>Comfortable translating performance metrics into recommendations for stakeholders and decision-makers.</li>
+              <li>Project work centered on revenue analytics, operations, dashboard reporting, forecasting, and workflow improvement.</li>
+              <li>A portfolio built around practical business use cases rather than generic sample work.</li>
             </ul>
           </div>
         </div>
